@@ -77,4 +77,30 @@ public class ChannelInitializer {
         return null;
     }
 
+    @Bean
+    public WSNonSslChannelInitializer controlledWsNonSslChannelInitializer() throws Exception {
+        return new WSNonSslChannelInitializer(controlledDispatcher, "/ws/controlled");
+    }
+
+    @Bean
+    public WSSslChannelInitializer controlledWsSslChannelInitializer() throws Exception {
+        if (controlledSocketConfig.isEnableSsl()) {
+            return new WSSslChannelInitializer(controlledSocketConfig, controlledDispatcher, "/ws/controlled");
+        }
+        return null;
+    }
+
+    @Bean
+    public WSNonSslChannelInitializer controllingWsNonSslChannelInitializer() throws Exception {
+        return new WSNonSslChannelInitializer(controllingDispatcher, "/ws/controlling");
+    }
+
+    @Bean
+    public WSSslChannelInitializer controllingWsSslChannelInitializer() throws Exception {
+        if (controllingSocketConfig.isEnableSsl()) {
+            return new WSSslChannelInitializer(controllingSocketConfig, controllingDispatcher, "/ws/controlling");
+        }
+        return null;
+    }
+
 }
